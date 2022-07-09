@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="O. Kalu">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/pulse/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/master.css}">
+    <title>eRegistrar - a demo spring boot webapp</title>
+</head>
+
+<body>
+    <header th:replace="fragments/header :: header"></header>
+    <p>&nbsp;</p>
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h3>Student List </h3>
+            </div>
+            <div>
+                <a href="/eregistrar/student/new" class="btn btn-dark">Add new Student</a>
+            </div>
+        </div>
+        <hr />
+
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Student Number</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Middle Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">GPA</th>
+                        <th scope="col">Enrollment Date</th>
+                        <th scope="col">International</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student, counter : ${students}">
+                        <th scope="row" th:text="${counter.count}+${'.'}"></th>
+                        <td th:text="${student.studentNumber}"></td>
+                        <td th:text="${student.firstName}"></td>
+                        <td th:text="${student.middleName}"></td>
+                        <td th:text="${student.lastName}"></td>
+                        <td th:text="${student.cgpa}"></td>
+                        <td th:text="${student.enrollmentDate}"></td>
+                        <td th:if="${student.isInternational}"><span class="badge bg-success">Yes</span></td>
+                        <td th:unless="${student.isInternational}"><span class="badge bg-primary">No</span>
+                        <td scope="col"><a
+                                th:href="@{'/eregistrar/student/edit/{studentId}'(studentId=${student.studentId})}"
+                                class="btn btn-dark">Edit</a></th>
+                        <td scope="col"><a
+                                th:href="@{'/eregistrar/student/delete/{studentId}'(studentId=${student.studentId})}"
+                                class="btn btn-dark">Delete</a></th>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- <footer class="footer"> <div class="container">
+<span class="text-muted">O. Kalu : : : CS425-SWE</span><span style="float:right;" class="text- muted">&copy; November 2018</span>
+</div> </footer> -->
+    <!-- Bootstrap core JavaScript ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-
+q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384- ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384- smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
